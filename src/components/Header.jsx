@@ -1,7 +1,7 @@
 import React from 'react'
 import Card from './Card'
 
-const Header = ({panier,onAdd,onDelete}) => {
+const Header = () => {
   
   return (
     <>
@@ -9,7 +9,7 @@ const Header = ({panier,onAdd,onDelete}) => {
         <div className="container-fluid">
           <h1 className="">Mini Store</h1>
           <div className="d-flex" >
-            <Card panier={panier} onAdd={onAdd} onDelete={onDelete} />
+            <Card  />
 
           </div>
         </div>

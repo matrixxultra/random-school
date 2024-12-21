@@ -1,10 +1,22 @@
-import React, { useState } from 'react'
+import React, { useContext, useReducer, useState } from 'react'
 import Header from './components/Header'
 import ListProducts from './components/ListProducts'
+import CardContext, { CardReducer } from './components/CardContext'
+import { products } from './components/data'
 
 const App = () => {
-  const [panier,setPanier] = useState([])
-
+  const initialState = {
+    products:products,
+    panier : []
+}
+  const [state,dispach] = useReducer(CardReducer,initialState)
+ 
+ 
+  const UseCardContext = useContext(CardContext)
+ 
+ 
+/*
+ const [panier,setPanier] = useState([])
   const handleAdd = (produit)=>{
     const item = panier.find(i=>i.id == produit.id)
     if (!item) {
@@ -29,10 +41,15 @@ const App = () => {
       setPanier(panier.map(i=>i.id== item.id ? {...i , quantity : i.quantity - 1} : i ))
     }
   }
+    */
   return (
     <>
-      <Header panier={panier} onAdd={handleIncrementQuantity} onDelete={handleDecrementQuantity}/>
-      <ListProducts onAdd={handleAdd}/>
+     
+    <CardContext.Provider value={{state,dispach}}>
+    <Header />
+    <ListProducts/>
+    </CardContext.Provider>
+      
     </>
   )
 }
